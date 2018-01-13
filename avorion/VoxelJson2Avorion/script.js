@@ -21,10 +21,12 @@ function getAvorionXML(jsonString) {
    
 let parsed = JSON.parse(jsonString);
 
-console.log(parsed);
+//console.log(parsed);
 
 let rootName =  'auto_' + Math.floor(Math.random() * 9223372036854775807);
-let doc = `<?xml version="1.0"?><${rootName} accumulateHealth="true" convex="false">\n`;
+let doc = [];
+
+doc.push(`<?xml version="1.0"?><${rootName} accumulateHealth="true" convex="false">\n`);
 let blocksize = 0.5;
 
 currentIndex = -1; //Root block of ship will be -1.
@@ -46,13 +48,14 @@ for(voxel of parsed.voxels)
 	let look = 0; //rotation up?
 	let up = 3; //rotation sideways?
 
-	doc += `\t<item parent="${currentIndex}" index="${++currentIndex}"><block index="${block}" material="${material}" look="${look}" up="${up}" color="ffa3afbf" lx="${lx}" ux="${ux}" ly="${ly}" uy="${uy}" lz="${lz}" uz="${uz}"/></item>\n`;
+	doc.push(`\t<item parent="${currentIndex}" index="${++currentIndex}"><block index="${block}" material="${material}" look="${look}" up="${up}" color="ffa3afbf" lx="${lx}" ux="${ux}" ly="${ly}" uy="${uy}" lz="${lz}" uz="${uz}"/></item>\n`);
 	parentIndex = 0; //The root element is the element whose parent is -1, after root element, add all blocks to the parent.
 }
 
-doc += `</${rootName}>`;
+ doc.push(`</${rootName}>`);
 
-return doc;
+
+return doc.join(''); //Concatenate all entries in one fell swoop.
 
 //Testing code that I used when debugging using nodejs.
 /* var fs = require('fs');
