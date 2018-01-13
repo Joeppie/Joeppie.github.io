@@ -1,0 +1,48 @@
+<html>
+	<script src="script.js"></script>
+
+	<script>
+	
+		function performConversion()
+		{
+		
+			try
+			{
+				let jsonData = document.getElementById("json").value;
+				let xml = getAvorionXML(jsonData);
+				document.getElementById("xml").innerText = xml;
+			}
+			catch(something)
+			{
+				alert("Sadly, something went wrong; was the json correctly formatted?" + something);
+			}
+		}
+
+	</script>
+
+<p style="color:#FF4444">
+	Note; this page is work in  progress; please use ctrl-f5 to reload it when you visit in the future; or you may be looking at an outdated, locally cached version.
+	<br/>
+	Currently, blocksize is hardcoded to 0.5 and bocks are hardcoded to iron hull
+</p>
+	<div>
+		<p>Please input the json output from the voxelizer below:</p>
+		<textarea id="json"> </textarea>
+	</div>
+
+	<button  onclick="performConversion();" >Convert to avorion xml</button>
+	
+
+	<div>
+			<p>Copy paste the below data into someshipname.xml the avorion/ships folder located in %appdata% (You can open %appdata% using the run-dialog in the windows startmenu)</p>
+		<textarea id="xml"> </textarea>
+
+		<p>After putting in ship.xml files, you will need to leave, and rejoin the galaxy for them to become visible in Avorion.</p>
+	</div>
+
+	<div>
+		<h2>Details</h2>
+		<p>This page is designed to work on the JSON output of the <a href="http://drububu.com/miscellaneous/voxelizer/?res=256">voxelizer website.</a></p>
+		<p>The javascript code iterates over all blocks and, using uniform blocksize and material, outputs the design into avorion.</p>
+	</div>
+</html>
